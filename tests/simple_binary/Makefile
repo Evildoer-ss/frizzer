@@ -1,5 +1,5 @@
 all:
-	gcc -no-pie -o test test.c -Wstringop-overflow=0
+	gcc -Og -o test test.c
 
 clean:
 	rm test

@@ -47,12 +47,12 @@ fuzz_in_process = false
 recv_timeout    = 0.1
 
 [target]
-process_pid     = $test_pid
+process_name    = "test"
 function        = "handleClient"
 remote_frida    = false
 frida_port      = 27042
 modules = [
-        "tests/simple_binary/test",
+        "test"
     ]
 EOF
 
@@ -60,10 +60,11 @@ frizzer add -p tmpprojdir indir
 
 # start frizzer in the background
 frizzer fuzz -p tmpprojdir &
+# frizzer fuzz -p tmpprojdir
 frizzer_pid=$!
 
-# kill frizzer after 15 seconds
-(sleep 15; kill -s INT $frizzer_pid)&
+# kill frizzer after 45 seconds
+(sleep 45; kill -s INT $frizzer_pid)&
 
 # get frizzer back in the foreground
 fg frizzer
@@ -76,7 +77,7 @@ result=$?
 
 if [ $result -eq 0 ]; then
     echo "Test succeeded!"
-    rm -rf tmpprojdir
+    # rm -rf tmpprojdir
 else
     echo "Test failed!"
 fi

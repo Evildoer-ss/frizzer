@@ -39,6 +39,10 @@ void handleClient(char* buf) {
     printf("%s",buf); 
 }
 
+void handleClientWrapper(char* buf) {
+    return handleClient(buf);
+}
+
 int main(int argc, char** argv) {
     char buf[100]; 
     socklen_t len; 
